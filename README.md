@@ -1,4 +1,4 @@
-RPLIDAR ROS package
+RPLIDAR ROS package for RPLIDAR A3
 =====================================================================
 
 ROS node and test application for RPLIDAR
