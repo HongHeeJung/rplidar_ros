@@ -13,24 +13,20 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   rosconsole
   sensor_msgs
-  message_generation
+  laser_geometry
+  tf
 )
 
-
-add_message_files(
-  FILES
-  Control.msg
-)
-
-generate_messages(
-  DEPENDENCIES
-  std_msgs
+find_package(PCL 1.3 REQUIRED COMPONENTS
+  common
+  io
 )
 
 include_directories(
   ${RPLIDAR_SDK_PATH}/include
   ${RPLIDAR_SDK_PATH}/src
   ${catkin_INCLUDE_DIRS}
+  ${PCL_INCLUDE_DIRS}
 )
 
 catkin_package()
@@ -40,6 +36,12 @@ target_link_libraries(rplidarNode ${catkin_LIBRARIES})
 
 add_executable(rplidarNodeClient src/client.cpp)
 target_link_libraries(rplidarNodeClient ${catkin_LIBRARIES})
+
+link_directories(${PCL_LIBRARY_DIRS})
+add_definitions(${PCL_DEFINITIONS})
+
+add_executable( Assemble src/ScanAssemble.cpp )
+target_link_libraries(Assemble ${catkin_LIBRARIES} ${PCL_COMMON_LIBRARIES} ${PCL_IO_LIBRARIES})
 
 install(TARGETS rplidarNode rplidarNodeClient
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
