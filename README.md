@@ -1,4 +1,4 @@
-RPLIDAR ROS package for RPLIDAR A3
+RPLIDAR ROS package (RPLIDAR A1) for autonomous driving
 =====================================================================
 
 ROS node and test application for RPLIDAR
